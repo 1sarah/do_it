@@ -26,6 +26,8 @@ config :do_it, DoItWeb.Endpoint,
 # at the `config/runtime.exs`.
 config :do_it, DoIt.Mailer, adapter: Swoosh.Adapters.Local
 
+config :petal_components, :error_translator_function, {DoItWeb.ErrorHelpers, :translate_error}
+
 # Swoosh API client is needed for adapters other than SMTP.
 config :swoosh, :api_client, false
 

@@ -1,4 +1,6 @@
 defmodule DoItWeb do
+
+
   @moduledoc """
   The entrypoint for defining your web interface, such
   as controllers, views, channels and so on.
@@ -29,6 +31,8 @@ defmodule DoItWeb do
 
   def view do
     quote do
+      use PetalComponents
+
       use Phoenix.View,
         root: "lib/do_it_web/templates",
         namespace: DoItWeb
