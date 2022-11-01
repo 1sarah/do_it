@@ -1,5 +1,6 @@
 defmodule DoItWeb.ErrorView do
   use DoItWeb, :view
+  import Phoenix.Component
 
   # If you want to customize a particular status code
   # for a certain format, you may uncomment below.

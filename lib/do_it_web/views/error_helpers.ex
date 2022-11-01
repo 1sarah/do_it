@@ -4,6 +4,7 @@ defmodule DoItWeb.ErrorHelpers do
   """
 
   use Phoenix.HTML
+  import Phoenix.Component
 
   @doc """
   Generates tag for inlined form input errors.

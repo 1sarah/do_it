@@ -11,7 +11,11 @@ defmodule DoItWeb.Router do
   end
 
   pipeline :api do
-    plug :accepts, ["json"]
+    plug(:accepts, ["json"])
+  end
+
+  pipeline :graphql do
+    plug(DoIt.Context)
   end
 
   scope "/", DoItWeb do
@@ -21,9 +25,11 @@ defmodule DoItWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", DoItWeb do
-  #   pipe_through :api
-  # end
+  scope "/api" do
+    pipe_through :graphql
+
+    forward "/", Absinthe.Plug, schema: DoItWeb.Graphql.sSchema
+  end
 
   # Enables LiveDashboard only for development
   #
@@ -39,6 +45,12 @@ defmodule DoItWeb.Router do
       pipe_through :browser
 
       live_dashboard "/dashboard", metrics: DoItWeb.Telemetry
+
+      forward("/graphql", Absinthe.Plug.GraphiQL,
+      schema: DoItWeb.Graphql.Schema,
+      interface: :playground
+
+    )
     end
   end
 
@@ -53,4 +65,9 @@ defmodule DoItWeb.Router do
       forward "/mailbox", Plug.Swoosh.MailboxPreview
     end
   end
+
+  if Mix.env == :dev do
+    forward "/graphql", Absinthe.Plug.GraphiQL, schema: DoItWeb.Schema, interface: :playground
+  end
+
 end
