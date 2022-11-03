@@ -2,7 +2,6 @@ defmodule DoItWeb.Graphql.Resolvers.User do
   use Absinthe.Schema.Notation
   alias DoIt.Accounts.Accounts
 
-
   def login(%{user_login: %{password: password, username: username}}, _resolution) do
     with {:check_login_limit, :allow} <-
            {:check_login_limit, TppcExWeb.Utils.check_rate(username)},
@@ -109,7 +108,6 @@ defmodule DoItWeb.Graphql.Resolvers.User do
   def get_all_users(_parent, args, context) do
     with {:auth, %{context: %{current_user: _user}}} <- {:auth, context},
          {:users, users} <- {:users, Accounts.list_all_users(args)} do
-
       {:ok, %{users: users, total: length(Accounts.list_users()), success: true}}
     else
       {:auth, _} ->
@@ -121,11 +119,8 @@ defmodule DoItWeb.Graphql.Resolvers.User do
   end
 
   def create_user(_parent, args, context) do
-
-    with {:auth, %{context: %{current_user: user}}} <- {:auth, context},
-    {:createuser, %{:ok,user} <- {:createuser, Accounts.create_user(args.user)}do
-
-
+    with {:auth, %{context: %{current_user: _user}}} <- {:auth, context},
+         {:createuser, {:ok, _user}} <- {:createuser, Accounts.create_user(args.user)} do
       {:ok, %{message: "User created succesfully", success: true}}
     else
       {:auth, _} ->
@@ -133,6 +128,15 @@ defmodule DoItWeb.Graphql.Resolvers.User do
 
       {:createuser, {:error, %Ecto.Changeset{} = changeset}} ->
         {:error, changeset}
+    end
+  end
+
+  def get_userInfo(_parent, _args, context) do
+    with {:auth, %{context: %{current_user: user}}} <- {:auth, context} do
+      {:ok, user.resource}
+    else
+      {:auth, _} ->
+        {:error, "You need to auth to use service"}
     end
   end
 end
