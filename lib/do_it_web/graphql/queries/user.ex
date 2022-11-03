@@ -1,19 +1,13 @@
 defmodule DoItWeb.Graphql.Queries.User do
   use Absinthe.Schema.Notation
 
-  alias DoIt.Accounts.Accounts
+  use Absinthe.Schema.Notation
 
-  def get_all_users(_parent, args, context) do
-    with {:auth, %{context: %{current_user: _user}}} <- {:auth, context},
-         {:users, users} <- {:users, Accounts.list_all_users(args)} do
-
-      {:ok, %{users: users, total: length(Accounts.list_users()), success: true}}
-    else
-      {:auth, _} ->
-        {:error, "You must be authenticated!"}
-
-      {:users, _} ->
-        {:error, "Empty Record"}
+  object :user_queries do
+    field :get_all_users, :user_result do
+      arg(:filter, :user_filter)
+      arg(:order, type: :sort_order, default_value: :desc)
+      resolve(DoItWeb.Graphql.Resolvers.User.get_all_users/3)
     end
   end
 end
