@@ -54,7 +54,9 @@ defmodule DoIt.MixProject do
       {:petal_components, "~> 0.18"},
       {:absinthe, "~> 1.7.0"},
       {:absinthe_plug, "~> 1.5.8"},
+      {:guardian, "~> 2.3.0"},
       {:hammer, "~> 6.1.0"},
+      {:hammer_plug, "~> 2.1"},
     ]
   end
 

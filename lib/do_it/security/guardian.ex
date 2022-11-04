@@ -1,4 +1,4 @@
-defmodule DoIt.Security.Guardian do
+defmodule DoIt.Guardian do
   alias DoIt.Accounts.User
   use Guardian, otp_app: :my_app
   def subject_for_token(%{id: id},_claims) do

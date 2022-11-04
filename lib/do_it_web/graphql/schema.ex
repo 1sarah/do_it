@@ -4,6 +4,7 @@ defmodule DoItWeb.Graphql.Schema do
   import_types(DoItWeb.Graphql.Types.User)
   import_types(DoItWeb.Graphql.Queries.User)
   import_types(DoItWeb.Graphql.Mutations.User)
+  import_types(DoItWeb.Graphql.Types.Utils)
 
   query do
     import_fields(:user_queries)

@@ -1,9 +1,5 @@
 defmodule DoItWeb.Graphql.Types.User do
   use Absinthe.Schema.Notation
-
-  defmodule TppcExWeb.Schema.Types.User do
-    use Absinthe.Schema.Notation
-
     import_types(Absinthe.Type.Custom)
 
     @desc "user object"
@@ -86,5 +82,3 @@ defmodule DoItWeb.Graphql.Types.User do
       field(:users, non_null(list_of(non_null(:user))))
     end
   end
-
-end

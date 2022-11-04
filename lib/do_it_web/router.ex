@@ -25,10 +25,14 @@ defmodule DoItWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  scope "/api" do
-    pipe_through :graphql
+  scope "/" do
+    pipe_through([:api, :graphql])
 
-    forward "/", Absinthe.Plug, schema: DoItWeb.Graphql.sSchema
+    forward("/graphql", Absinthe.Plug.GraphiQL,
+    schema: DoItWeb.Graphql.Schema,
+    interface: :playground
+
+  )
   end
 
   # Enables LiveDashboard only for development
@@ -46,11 +50,7 @@ defmodule DoItWeb.Router do
 
       live_dashboard "/dashboard", metrics: DoItWeb.Telemetry
 
-      forward("/graphql", Absinthe.Plug.GraphiQL,
-      schema: DoItWeb.Graphql.Schema,
-      interface: :playground
 
-    )
     end
   end
 
@@ -66,8 +66,8 @@ defmodule DoItWeb.Router do
     end
   end
 
-  if Mix.env == :dev do
-    forward "/graphql", Absinthe.Plug.GraphiQL, schema: DoItWeb.Schema, interface: :playground
-  end
+  # if Mix.env == :dev do
+  #   forward "/graphql", Absinthe.Plug.GraphiQL, schema: DoItWeb.Schema, interface: :playground
+  # end
 
 end

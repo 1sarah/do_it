@@ -5,7 +5,7 @@ defmodule DoItWeb.Graphql.Mutations.User do
     @desc "User Login"
     field :login, type: :login_resp do
       arg(:user_login, non_null(:user_login_inputs))
-      resolve(&UserResolver.login/2)
+      resolve(&DoItWeb.Graphql.Resolvers.User.login/2)
     end
 
     @desc "Verify OTP"
@@ -16,7 +16,7 @@ defmodule DoItWeb.Graphql.Mutations.User do
 
     field :create_user, type: :success_message do
       arg(:user, non_null(:user_create))
-      resolve(&UserResolver.create_user/3)
+      resolve(&DoItWeb.Graphql.Resolvers.User.create_user/3)
     end
   end
 end

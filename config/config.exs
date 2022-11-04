@@ -10,6 +10,11 @@ import Config
 config :do_it,
   ecto_repos: [DoIt.Repo]
 
+config :hammer,
+  backend: {Hammer.Backend.ETS,
+            [expiry_ms: 60_000 * 60 * 4,
+             cleanup_interval_ms: 60_000 * 10]}
+
 # Configures the endpoint
 config :do_it, DoItWeb.Endpoint,
   url: [host: "localhost"],
@@ -58,6 +63,10 @@ config :logger, :console,
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
+
+config :do_it, DoIt.Guardian,
+  issuer: "tppc_ex",
+  secret_key: "gB3fD/E49c9hyljd2gmXGwS9fqoFVADxIXtclnFNdV+ul2BzA0I6KvLXeQIdx8sj"
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
