@@ -8,6 +8,8 @@ defmodule DoIt.Repo.Migrations.CreateUsers do
       add :email, :string
       add :phone_number, :string
       add :gender, :string
+      add :password, :string
+      add :active,:boolean
 
       timestamps()
     end

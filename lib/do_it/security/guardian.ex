@@ -1,6 +1,7 @@
 defmodule DoIt.Guardian do
   alias DoIt.Accounts.User
-  use Guardian, otp_app: :my_app
+  alias DoIt.Repo
+  use Guardian, otp_app: :do_it
   def subject_for_token(%{id: id},_claims) do
     # You can use any value for the subject of your token but
     # it should be useful in retrieving the resource later, see
@@ -18,7 +19,6 @@ defmodule DoIt.Guardian do
 
 
     resource = Repo.get(User,id)
-    Logger.debug(resource)
 
 
     {:ok,  %{resource: resource, scope: scope}}

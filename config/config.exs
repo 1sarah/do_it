@@ -65,8 +65,8 @@ config :logger, :console,
 config :phoenix, :json_library, Jason
 
 config :do_it, DoIt.Guardian,
-  issuer: "tppc_ex",
-  secret_key: "gB3fD/E49c9hyljd2gmXGwS9fqoFVADxIXtclnFNdV+ul2BzA0I6KvLXeQIdx8sj"
+  issuer: "do_it",
+  secret_key: "LXUtiFJuwZ4str8KsUktMQo1Vp3SK1ouzQc3YeY4f0cttkK7em9yv6zAu8MvjSFH"
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

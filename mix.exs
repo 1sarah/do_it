@@ -56,6 +56,7 @@ defmodule DoIt.MixProject do
       {:absinthe_plug, "~> 1.5.8"},
       {:guardian, "~> 2.3.0"},
       {:hammer, "~> 6.1.0"},
+      {:argon2_elixir, "~> 3.0.0"},
       {:hammer_plug, "~> 2.1"},
     ]
   end
