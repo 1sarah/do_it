@@ -52,6 +52,7 @@ defmodule DoIt.MixProject do
       {:plug_cowboy, "~> 2.5"},
       {:tailwind, "~> 0.1", runtime: Mix.env() == :dev},
       {:petal_components, "~> 0.18"},
+      {:absinthe_phoenix, "~> 2.0.2"},
       {:absinthe, "~> 1.7.0"},
       {:absinthe_plug, "~> 1.5.8"},
       {:guardian, "~> 2.3.0"},

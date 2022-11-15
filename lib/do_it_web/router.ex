@@ -29,10 +29,14 @@ defmodule DoItWeb.Router do
     pipe_through([:api, :graphql])
 
     forward("/graphql", Absinthe.Plug.GraphiQL,
-    schema: DoItWeb.Graphql.Schema,
-    interface: :playground
+      schema: DoItWeb.Graphql.Schema,
+      interface: :playground
+    )
+  end
 
-  )
+  scope "/user" do
+    pipe_through :browser
+    resources "/users", DoItWeb.UserController
   end
 
   # Enables LiveDashboard only for development
@@ -49,8 +53,6 @@ defmodule DoItWeb.Router do
       pipe_through :browser
 
       live_dashboard "/dashboard", metrics: DoItWeb.Telemetry
-
-
     end
   end
 
@@ -69,5 +71,4 @@ defmodule DoItWeb.Router do
   # if Mix.env == :dev do
   #   forward "/graphql", Absinthe.Plug.GraphiQL, schema: DoItWeb.Schema, interface: :playground
   # end
-
 end
