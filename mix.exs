@@ -57,6 +57,7 @@ defmodule DoIt.MixProject do
       {:guardian, "~> 2.3.0"},
       {:hammer, "~> 6.1.0"},
       {:argon2_elixir, "~> 3.0.0"},
+      {:dataloader, "~> 1.0.10"},
       {:hammer_plug, "~> 2.1"},
     ]
   end
