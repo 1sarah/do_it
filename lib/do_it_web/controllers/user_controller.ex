@@ -1,5 +1,6 @@
 defmodule DoItWeb.UserController do
   use DoItWeb, :controller
+
   use Absinthe.Phoenix.Controller,
     schema: DoItWeb.Graphql.Schema
 
@@ -7,22 +8,14 @@ defmodule DoItWeb.UserController do
   # alias DoIt.Accounts.User
 
   @graphql """
-  {
-  get_all_users{
-    users{
-      username
-      email
-      gender
-    }
-    total
-    success
+  query Index @action(mode: INTERNAL) {
+    get_all_users
   }
-  }
-
   """
 
   def index(conn, result) do
-    render(conn, "index.html", users: result.data["get_all_users"] || [])
+    IO.inspect(result)
+    render(conn, "index.html", users: result.data.get_all_users.users)
   end
 
   # def new(conn, _params) do
